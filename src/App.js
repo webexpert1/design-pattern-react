@@ -4,41 +4,29 @@ import { CurrentUserLoader } from './CurrentUserLoader';
 import { UserInfo } from './UserInfo';
 import { UserLoader } from './UserLoader';
 import { ResourceLoader } from './loaders/ResourceLoader';
-import { ProductInfo } from './products/ProductInfo';
-import { DataSource } from './loaders/DataSource';
-import { api } from './axios/api';
+import { useState } from 'react';
+import { ControlledModal } from './ControlledModal';
 
 
-const userIds = ['123', '234', '235'];
 
-const getServerData = url => async () => {
-  const response = await api.get('/users/123')
-  return response.data;
-}
+
 function App() {
+  const [showModal, setShouldShow] = useState(false);
+
+  function closeModal() {
+    this.setShouldShow(false);
+  }
+
   return (
     <>
-    <DataSource getDataFunc={getServerData('/users/123')} resourceName='user'>
-       <UserInfo />
-    </DataSource>
-    {/* <ResourceLoader resourceUrl='/products/1234' resourceName='product'>
-        <ProductInfo />
-    </ResourceLoader>
+   
+    <button onClick={() => setShouldShow(true)}>
+      Show Modal
+    </button>
+    <ControlledModal shouldShow={showModal} onRequestClose={() => setShouldShow(false)}>
+      <p>Hell Modal</p>
+    </ControlledModal>
 
-    <ResourceLoader resourceUrl='/users/123' resourceName='user'>
-        <UserInfo />
-    </ResourceLoader> */}
-    {/* {
-      // make api calls for a list of Ids
-      userIds.map((userId, index) => (
-        <UserLoader userId={userId}>
-          <UserInfo />
-        </UserLoader>
-      ))
-    } */}
-    {/* <CurrentUserLoader userId='235'>
-        UserInfo />
-      </CurrentUserLoader> */}
     </>
   );
 }
