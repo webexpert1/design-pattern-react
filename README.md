@@ -2,7 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Container Components
+The Idea of container components, Our components shouldn't know where their data is comming from
 ## Available Scripts
+
 
 In the project directory, you can run:
 

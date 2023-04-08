@@ -1,42 +1,44 @@
 import logo from './logo.svg';
 import './App.css';
-import { Modal } from './Modal';
-import { RegularList } from './RegularList';
-import { LargePersonListItem} from './people/LargePersonListItem';
-import { SmallPersonListItem } from './people/SmallPersonListItem';
+import { CurrentUserLoader } from './CurrentUserLoader';
+import { UserInfo } from './UserInfo';
+import { UserLoader } from './UserLoader';
+import { ResourceLoader } from './loaders/ResourceLoader';
+import { ProductInfo } from './products/ProductInfo';
+import { DataSource } from './loaders/DataSource';
+import { api } from './axios/api';
 
-const people = [
-  {
-    name: 'John Doe',
-    age: 54,
-    hairColor: 'brown',
-    hobbies: ['swimming', 'bicycling', 'video games']
-  },
-  {
-    name: 'Brenda Smith',
-    age: 33,
-    hairColor: 'black',
-    hobbies: ['golf', 'mathematics']
-  },
-  {
-    name: 'Jane Garcia',
-    age: 27,
-    hairColor: 'blonde',
-    hobbies: ['biology', 'medicine', 'gymnastics']
-  },
-]
 
+const userIds = ['123', '234', '235'];
+
+const getServerData = url => async () => {
+  const response = await api.get('/users/123')
+  return response.data;
+}
 function App() {
   return (
     <>
-      <Modal>
-        <RegularList  
-           items={people}
-           resourceName='person'
-           itemComponent={SmallPersonListItem} />
-      </Modal>
+    <DataSource getDataFunc={getServerData('/users/123')} resourceName='user'>
+       <UserInfo />
+    </DataSource>
+    {/* <ResourceLoader resourceUrl='/products/1234' resourceName='product'>
+        <ProductInfo />
+    </ResourceLoader>
 
-      {/* </Modal> */}
+    <ResourceLoader resourceUrl='/users/123' resourceName='user'>
+        <UserInfo />
+    </ResourceLoader> */}
+    {/* {
+      // make api calls for a list of Ids
+      userIds.map((userId, index) => (
+        <UserLoader userId={userId}>
+          <UserInfo />
+        </UserLoader>
+      ))
+    } */}
+    {/* <CurrentUserLoader userId='235'>
+        UserInfo />
+      </CurrentUserLoader> */}
     </>
   );
 }
