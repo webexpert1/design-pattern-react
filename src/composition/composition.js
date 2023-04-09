@@ -16,5 +16,11 @@ export const DangerButton = props => {
     )
 }
 
+export const BigGreenButton = props => {
+    return (
+        <Button {...props} color='green' size='large'  />
+    )
+}
+
 // usage
 {/* <DangerButton text="Dont do  it" /> */}
