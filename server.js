@@ -102,7 +102,7 @@ app.post('/users/:id', (req, res) => {
     const {id} = req.params;
     const { user: updatedUser } = req.body;
 
-    users = users.map(user => user.id === id ? updatedUser : updatedUser);
+    users = users.map(user => user.id === id ? updatedUser : user);
     res.json(users.find(user => user.id === id))
 })
 
