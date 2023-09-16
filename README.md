@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Layout Components help to organize and present your components.
 
 Container Components
 The Idea of container components, Our components shouldn't know where their data is comming from
