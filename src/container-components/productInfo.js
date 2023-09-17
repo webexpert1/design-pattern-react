@@ -1,5 +1,5 @@
 
-export const SmallProductListItem = ({ person }) => {
+export const ProductInfo = ({ person }) => {
     const { name, price, descripion, rating } = person;
     return(
         <>
